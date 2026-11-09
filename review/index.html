@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>قيّم الرملاوي</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;800&display=swap">
+<style>
+  :root { --bg: #F7F3EC; --ink: #1B1B1B; --muted: #555555; --accent: #8A6420; }
+  * { box-sizing: border-box; }
+  body { margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center;
+         background: var(--bg); color: var(--ink); font-family: 'Cairo', system-ui, sans-serif; text-align: center; padding: 24px 16px; }
+  main { max-width: 420px; width: 100%; }
+  h1 { font-size: 30px; font-weight: 800; margin: 0 0 8px; }
+  p { font-size: 17px; color: var(--muted); margin: 0 0 24px; line-height: 1.7; }
+  a.btn { display: block; padding: 14px 20px; border-radius: 14px; background: var(--accent); color: #fff;
+          font-size: 18px; font-weight: 800; text-decoration: none; margin-bottom: 12px; }
+  a.alt { display: block; color: var(--accent); font-size: 15px; font-weight: 600; }
+</style>
+</head>
+<body>
+<main>
+  <h1>رأيك يفرق معانا</h1>
+  <p>بنفتحلك صفحة التقييمات… لو مااتفتحتش لوحدها دوس على الزرار</p>
+  <a class="btn" id="app" href="#">اكتب رأيك في الرملاوي</a>
+  <a class="alt" id="web" href="https://m.facebook.com/m.elramlawi/reviews/">افتحها في المتصفح</a>
+</main>
+<script>
+  var WEB = 'https://m.facebook.com/m.elramlawi/reviews/';
+  var APP = 'fb://facewebmodal/f?href=' + encodeURIComponent(WEB);
+  var ua = navigator.userAgent || '';
+  var isMobile = /Android|iPhone|iPad|iPod/i.test(ua);
+  var isInFbBrowser = /FBAN|FBAV|FB_IAB/i.test(ua);
+  document.getElementById('app').href = isMobile && !isInFbBrowser ? APP : WEB;
+
+  if (isMobile && !isInFbBrowser) {
+    var left = false;
+    document.addEventListener('visibilitychange', function () { if (document.hidden) left = true; });
+    window.location.href = APP;
+    setTimeout(function () { if (!left) window.location.replace(WEB); }, 1800);
+  } else {
+    window.location.replace(WEB);
+  }
+</script>
+</body>
+</html>
